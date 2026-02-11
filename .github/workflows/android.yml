@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Pobierz repozytorium
+      # 1. Pobierz repo
       - uses: actions/checkout@v4
 
-      # 2. Zainstaluj JDK 17 (wymagane dla nowszych wersji Gradle / Android)
+      # 2. Zainstaluj JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:

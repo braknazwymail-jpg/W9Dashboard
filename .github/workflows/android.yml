@@ -9,20 +9,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Pobierz repozytorium
       - uses: actions/checkout@v4
 
+      # 2. Zainstaluj JDK 17 (wymagane dla nowszych wersji Gradle / Android)
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      # 3. Zainstaluj Gradle (bez potrzeby gradlew)
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: '8.2'
 
+      # 4. Buduj aplikację
       - name: Build Debug APK
-        run: ./gradlew assembleDebug
+        run: gradle assembleDebug
 
+      # 5. Prześlij wygenerowane APK jako artefakt
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
